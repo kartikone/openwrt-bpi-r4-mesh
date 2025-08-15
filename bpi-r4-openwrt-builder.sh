@@ -6,7 +6,7 @@ echo "==== 1. LIMPIEZA ===="
 rm -rf openwrt mtk-openwrt-feeds tmp_comxwrt
 
 echo "==== 2. CLONA TUS REPOS PERSONALES ===="
-git clone --branch main https://github.com/brudalevante/6.6.100-openwrt.git openwrt || true
+git clone --branch openwrt-24.10 https://github.com/brudalevante/6.6.100-openwrt.git openwrt || true
 cd openwrt
 git checkout 4941509f573676c4678115a0a3a743ef78b63c17
 cd ..
@@ -29,11 +29,6 @@ cp -r my_files/1007-wozi-arch-arm64-dts-mt7988a-add-thermal-zone.patch mtk-openw
 cp -r my_files/200-wozi-libiwinfo-fix_noise_reading_for_radios.patch openwrt/package/network/utils/iwinfo/patches
 cp -r my_files/99999_tx_power_check.patch mtk-openwrt-feeds/autobuild/unified/filogic/mac80211/24.10/files/package/kernel/mt76/patches/
 cp -r my_files/999-2764-net-phy-sfp-add-some-FS-copper-SFP-fixes.patch openwrt/target/linux/mediatek/patches-6.6/
-
-sed -i 's/CONFIG_PACKAGE_perf=y/# CONFIG_PACKAGE_perf is not set/' mtk-openwrt-feeds/autobuild/unified/filogic/mac80211/24.10/defconfig
-sed -i 's/CONFIG_PACKAGE_perf=y/# CONFIG_PACKAGE_perf is not set/' mtk-openwrt-feeds/autobuild/autobuild_5.4_mac80211_release/mt7988_wifi7_mac80211_mlo/.config
-sed -i 's/CONFIG_PACKAGE_perf=y/# CONFIG_PACKAGE_perf is not set/' mtk-openwrt-feeds/autobuild/autobuild_5.4_mac80211_release/mt7986_mac80211/.config
-
 
 echo "==== 5. CLONA Y COPIA PAQUETES PERSONALIZADOS ===="
 git clone --depth=1 --single-branch --branch main https://github.com/brudalevante/dawn.git tmp_comxwrt
@@ -59,10 +54,10 @@ rm -rf feeds/
 cat feeds.conf.default
 
 echo "==== 8. COPIA LA CONFIGURACIÓN BASE (mm_perf.config) ===="
-cp -v ../configs/config_mm_06082025.config .config
+cp -v ../configs/mm_perf.config .config
 
 echo "==== 9. COPIA TU CONFIGURACIÓN PERSONALIZADA AL DEFCONFIG DEL AUTOBUILD ===="
-cp -v ../configs/config_mm_06082025.config ../mtk-openwrt-feeds/autobuild/unified/filogic/24.10/defconfig
+cp -v ../configs/mm_perf.config ../mtk-openwrt-feeds/autobuild/unified/filogic/24.10/defconfig
 
 echo "==== 10. ACTUALIZA E INSTALA FEEDS ===="
 ./scripts/feeds update -a
