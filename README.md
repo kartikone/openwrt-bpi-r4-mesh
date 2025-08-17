@@ -1,3 +1,30 @@
+# xgs-pont-4 (OpenWrt Kernel 6.6.100)
+
+## Quick Start
+Clone the repository:
+```sh
+git clone https://github.com/brudalevante/xgs-pont-2.git
+```
+Set the correct permissions:
+```sh
+chmod 776 -R xgs-pont-2
+```
+Enter the project directory:
+```sh
+cd xgs-pont-2
+```
+Before running the builder, please read all comments in the script!
+
+To start the build process:
+```sh
+./bpi-r4-openwrt-builder.sh
+```
+
+
+
+
+
+
 # xgs-pont-2 — OpenWrt custom build for BPI-R4 (woziwrt, MTK, fakemesh 6G)
 
 > **IMPORTANT:** BEFORE RUNNING BUILDER, READ ALL COMMENTS IN THE SCRIPT!
