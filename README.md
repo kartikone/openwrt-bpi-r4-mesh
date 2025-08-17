@@ -1,4 +1,4 @@
-# xgs-pont-4 (OpenWrt Kernel 6.6.100)
+# xgs-pont-2 (OpenWrt Kernel 6.6.100)
 
 ## Quick Start
 Clone the repository:
