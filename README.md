@@ -90,7 +90,7 @@ Temperature Widget: Displays current temperature; advanced users can show hidden
 
 ---
 
-## Introduction to mesh on 2.4G, 5G and 6G bands
+## Introduction to mesh on 2G, 5G and 6G bands
 
 fakemesh is a network topology with a controller (AC), one or more wired APs, and satellites (Agents). It combines wireless Mesh and AC+AP modes.  
 Wired APs connect via Ethernet, satellites via WiFi as STA clients—enabling seamless coverage (including wired links).
@@ -207,7 +207,7 @@ Widget de temperatura: Muestra la temperatura actual; usuarios avanzados pueden 
 
 ---
 
-## Introducción a mesh en las bandas 2.4G, 5G y 6G
+## Introducción a mesh en las bandas 2G, 5G y 6G
 
 fakemesh es una topología de red formada por un controlador (AC), uno o más AP cableados y satélites (Agent).  
 Combina Mesh inalámbrico y modo AC+AP.  
