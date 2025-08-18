@@ -35,7 +35,7 @@ This repository compiles OpenWrt with Kernel 6.6.100 and the latest MTK and Open
 - Kernel 6.6.100 modified OpenWrt (2 patches modified and 1 created to enable multigigabit (1G, 2.5G, 5G, 10G) SFP+ support, as of 18-08-2025)
 - Advanced LED and port management
 - Multigigabit (1G, 2.5G, 5G, 10G) SFP+ port support
-- Custom system and network configs
+- Custom system and network configs and personalized my_files/board.json
 - Mesh with 6G support (“fakemesh”)
 - Board-specific adjustments via `board.json`
 - `luci-app-upnp` and `luci-app-wifischedule` included by default
@@ -153,7 +153,7 @@ El repositorio compila OpenWrt con kernel 6.6.100 y los últimos drivers y fuent
 - Kernel 6.6.100 modificado Openwrt( modificados 2 parches y creado uno para que soporte multigigabit (1G, 2,5G, 5G, 10G) en los puertos SFP+ , a fecha 18-08-2025) 
 - Gestión avanzada de LEDs y puertos
 - Soporte multigigabit (1G, 2,5G, 5G, 10G) en los puertos SFP+ 
-- Configs system y network personalizadas
+- Configs system y network y my_files/board.json personalizadas
 - Mesh con soporte para 6G (“fakemesh”)
 - Ajustes específicos via `board.json`
 - `luci-app-upnp` y `luci-app-wifischedule` incluidos por defecto
