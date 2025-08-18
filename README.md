@@ -4,15 +4,15 @@
 
 Clone the repository:
 ```bash
-git clone https://github.com/brudalevante/xgs-pont-2.git
+git clone https://github.com/brudalevante/xgs-pont-2-espejo.git
 ```
 Set the correct permissions:
 ```bash
-chmod 776 -R xgs-pont-2
+chmod 776 -R xgs-pont-2-espejo
 ```
 Enter the project directory:
 ```bash
-cd xgs-pont-2
+cd xgs-pont-2-espejo
 ```
 **Before running the builder, please read all comments in the script!**
 
