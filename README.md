@@ -130,7 +130,7 @@ If the controller is not the gateway or DHCP server, set LAN IP, gateway, and DN
 
 ## Acknowledgments
 
-Special thanks to woziwrt (without your work and patches, this project would not have reached this level).  
+Special thanks to woziwrt (without your work and patches, this project would not have reached this level).  https://github.com/woziwrt/bpi-r4-openwrt-builder/tree/main
 Thank you RafalB82 for the xgs-pon patch for the 8311-was-110, which allows routers to work perfectly with 10G symmetric fiber (up to 8Gbps real).  
 Thanks to GitHub Copilot for making 6G mesh possible; after months of work, mesh networking is now available on 2G, 5G, and 6G bands!  
 All work done within OpenWrt to ensure that port LEDs are only lit when a network cable is connected (and to avoid duplicated ports) is also available for anyone who wants to improve it.  
@@ -248,7 +248,7 @@ Si el controlador no es gateway ni servidor DHCP, configura IP LAN, gateway y DN
 
 ## Agradecimientos
 
-Gracias especialmente a woziwrt, sin cuyo trabajo y parches este proyecto no habría llegado tan lejos.  
+Gracias especialmente a woziwrt, sin cuyo trabajo y parches este proyecto no habría llegado tan lejos.  https://github.com/woziwrt/bpi-r4-openwrt-builder/tree/main
 Gracias a RafalB82 por el parche xgs-pon para el 8311-was-110, con el que los routers funcionan perfecto con fibra directa 10G simétricas (¡hasta 8G reales!).  
 Gracias a GitHub Copilot por ayudar a hacer posible el mesh en 6G; tras meses de trabajo, la malla funcional está en bandas 2G, 5G y 6G.  
 Todo el trabajo realizado dentro de OpenWrt para que los LEDs de los puertos solo se enciendan cuando se conecta un cable de red (y para evitar puertos duplicados) está disponible para quien quiera mejorarlo.  
