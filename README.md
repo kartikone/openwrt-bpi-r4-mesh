@@ -60,9 +60,9 @@ See the repository for the complete feature set.
 ## How to build
 
 ```bash
-git clone https://github.com/brudalevante/xgs-pont-2.git
-chmod 776 -R xgs-pont-2
-cd xgs-pont-2
+git clone https://github.com/brudalevante/xgs-pont-2-espejo.git
+chmod 776 -R xgs-pont-2-espejo
+cd xgs-pont-2-espejo
 
 # BEFORE RUNNING BUILDER, READ ALL COMMENTS IN THE SCRIPT!
 ./bpi-r4-openwrt-builder.sh
@@ -177,9 +177,9 @@ Ver el repositorio para comprobar todo lo que lleva.
 ## Cómo compilar
 
 ```bash
-git clone https://github.com/brudalevante/xgs-pont-2.git
-chmod 776 -R xgs-pont-2
-cd xgs-pont-2
+git clone https://github.com/brudalevante/xgs-pont-2-espejo.git
+chmod 776 -R xgs-pont-2-espejo
+cd xgs-pont-2-espejo
 
 # ¡ANTES DE EJECUTAR EL BUILDER, LEE TODOS LOS COMENTARIOS DEL SCRIPT!
 ./bpi-r4-openwrt-builder.sh
