@@ -47,7 +47,7 @@ This repository compiles OpenWrt with Kernel 6.6.100 and the latest MTK and Open
 No more duplicated ports.  
 No more "disco" LEDs: Port LEDs only light up when a cable is connected.  
 Patches and improvements applied directly to OpenWrt.  
-Now LEDs and the system correctly detect and show link status at all these speeds.  
+Now LEDs and the system correctly detect and show status.  
 Advanced LED menu: All LED triggers and actions can be configured in LuCI.  
 CPU load and temperature: Widgets added in LuCI.  
 Extra configuration:  
@@ -91,7 +91,7 @@ Temperature Widget: Displays current temperature; advanced users can show hidden
 
 ---
 
-## fakemesh introduction
+## Introduction to mesh on 2.4G, 5G and 6G bands
 
 fakemesh is a network topology with a controller (AC), one or more wired APs, and satellites (Agents). It combines wireless Mesh and AC+AP modes.  
 Wired APs connect via Ethernet, satellites via WiFi as STA clients—enabling seamless coverage (including wired links).
@@ -165,7 +165,7 @@ El repositorio compila OpenWrt con kernel 6.6.100 y los últimos drivers y fuent
 Adiós a los puertos duplicados.  
 Adiós a las luces “de discoteca”: Los LEDs solo se encienden si hay cable conectado.  
 Parches y mejoras aplicados directamente sobre OpenWrt.  
-Ahora los LEDs y el sistema detectan y muestran correctamente el estado de enlace a todas estas velocidades.  
+Ahora los LEDs y el sistema detectan y muestran correctamente el estado.  
 Menú de LEDs avanzado: Todos los triggers y acciones de LEDs se pueden configurar en LuCI.  
 Carga de CPU y temperatura: Widgets añadidos en LuCI.  
 Configuración extra:  
@@ -209,7 +209,7 @@ Widget de temperatura: Muestra la temperatura actual; usuarios avanzados pueden 
 
 ---
 
-## Introducción a fakemesh
+## Introducción a mesh en las bandas 2.4G, 5G y 6G
 
 fakemesh es una topología de red formada por un controlador (AC), uno o más AP cableados y satélites (Agent).  
 Combina Mesh inalámbrico y modo AC+AP.  
