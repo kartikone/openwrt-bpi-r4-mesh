@@ -32,9 +32,9 @@ This repository compiles OpenWrt with Kernel 6.6.100 and the latest MTK and Open
 
 ## New features in this release
 
-- **NEW: Advanced LED configuration menu fully functional**   
+- **NEW: Advanced LED configuration menu fully functional**  
   A new patch: `mt7986a-bananapi-bpi-r3-mini` was created and applied, resulting in a fully working and customizable LED menu in LuCI.  
-  All menu options are operational and configurable (see images and test results below).
+  All menu options are operational and configurable.
 - **NEW: CPU Load and Temperature / Show hidden sensors**  
   Now you can monitor CPU load, temperature, and reveal hidden hardware sensors directly from the interface.
 - Added `luci-app-upnp` for Universal Plug and Play support.
@@ -53,7 +53,7 @@ This repository compiles OpenWrt with Kernel 6.6.100 and the latest MTK and Open
   (WAN/LAN ports support 1Gb)
 - Now, LEDs and software can correctly detect and indicate link status at all these speeds.
 - **Advanced LED menu:** All LED triggers and actions can be configured through LuCI.
-- **CPU Load and Temperature:** Added monitoring widgets in LuCI 
+- **CPU Load and Temperature:** Added monitoring widgets in LuCI.
 - Extra configuration:  
   - Two folders under `config/`: `system` and `network`
   - Customized `my_files/board.json`
@@ -65,7 +65,7 @@ This repository compiles OpenWrt with Kernel 6.6.100 and the latest MTK and Open
 ## Features
 
 - Kernel 6.6.100 (all patches up to date, as of 18-08-2025)
-- Advanced LED and port management 
+- Advanced LED and port management
 - Multi-gigabit (1G, 2.5G, 5G, 10G) SFP+ port support (with netdev LED trigger patch)
 - Custom system and network configs
 - Mesh with 6G support ("fakemesh")
@@ -99,24 +99,6 @@ Tested on VMware Fusion, Workstation and Hyper-V.
 This repository and its builds are currently BETA.  
 It works in my environment, but there may be bugs, missing features, or unexpected behaviors.  
 Use at your own risk and feel free to report any issues or contribute improvements.
-
----
-
-## LED Configuration Screenshots
-
-Below you can see the new LED menu and its options in action (all options tested and working):
-
-![LED Menu Overview]  
-*LED configuration menu: all options available and working*
-
-![LED Menu Dropdown] 
-*Example: Editing LAN1 LED, all triggers selectable, interface chosen*
-
-![LEDs on device]
-*Live hardware: LED 3 blinking, LED 2 on, LAN1 and WAN off as configured; WPS LED blinking*
-
-![LED Menu, final state] 
-*Another menu state showing custom triggers and actions*
 
 ---
 
@@ -176,8 +158,6 @@ Thanks for all the work so far—there is still much to do, and many ideas to co
 
 ---
 
----
-
 # Español
 
 ## Sobre este proyecto
@@ -189,9 +169,9 @@ El repositorio compila OpenWrt con kernel 6.6.100 y los últimos drivers y fuent
 
 ## Novedades en esta versión
 
-- **NUEVO: Menú de configuración de LEDs avanzado y funcional** ([ver capturas abajo](#capturas-del-menú-led)).  
+- **NUEVO: Menú de configuración de LEDs avanzado y funcional**  
   Se ha creado y aplicado un nuevo parche: `mt7986a-bananapi-bpi-r3-mini`, que permite un menú de configuración de LEDs en LuCI totalmente funcional y personalizable.  
-  Todas las opciones del menú se pueden configurar y funcionan (ver imágenes y resultados de pruebas).
+  Todas las opciones del menú se pueden configurar y funcionan.
 - **NUEVO: Monitorización de carga de CPU y temperatura / Mostrar sensores ocultos**  
   Ahora puedes ver la carga de la CPU, la temperatura y acceder a sensores hardware avanzados desde la interfaz.
 - Añadido `luci-app-upnp` para soporte UPnP.
@@ -210,19 +190,19 @@ El repositorio compila OpenWrt con kernel 6.6.100 y los últimos drivers y fuent
   (Los puertos WAN y LAN solo soportan 1Gb)
 - Ahora los LEDs y el sistema detectan y muestran correctamente el estado de enlace a todas estas velocidades.
 - **Menú de LEDs avanzado:** Todos los triggers y acciones de LEDs se pueden configurar en LuCI.
-- **Carga de CPU y temperatura:** Widgets añadidos en LuCI (ver [abajo](#monitorización-cpu-y-temperatura)).
+- **Carga de CPU y temperatura:** Widgets añadidos en LuCI.
 - Configuración extra:  
   - Dos carpetas bajo `config/`: `system` y `network`
   - Incluido y personalizado `my_files/board.json`
 - Mesh preparado con soporte 6GHz (“fakemesh”, ver sección abajo)
-- Ver el repositorio o las imágenes para comprobar todo lo que lleva.
+- Ver el repositorio para comprobar todo lo que lleva.
 
 ---
 
 ## Características de esta build
 
 - Kernel 6.6.100 (con todos los parches al día, a fecha 18-08-2025)
-- Gestión avanzada de LEDs y puertos ([ver capturas](#capturas-del-menú-led))
+- Gestión avanzada de LEDs y puertos
 - Soporte multigigabit (1G, 2,5G, 5G, 10G) en los puertos SFP+ (con parche en trigger de LEDs netdev)
 - Configs system y network personalizadas
 - Mesh con soporte para 6G (“fakemesh”)
@@ -256,24 +236,6 @@ Probado en VMware Fusion, Workstation y Hyper-V.
 Este repositorio y sus builds están en fase BETA.  
 Funciona en mi entorno, pero puede contener errores, carecer de funciones o comportarse de forma inesperada.  
 Úsalo bajo tu responsabilidad y no dudes en reportar problemas o proponer mejoras.
-
----
-
-## Capturas del menú LED
-
-Aquí puedes ver el nuevo menú de LEDs y sus opciones en acción (todas las opciones probadas y funcionando):
-
-![Resumen del menú LED]
-*Menú de configuración de LEDs: todas las opciones disponibles y funcionando*
-
-![Menú LED desplegable]  
-*Ejemplo: Editando LAN1 LED, triggers configurables, interfaz elegida*
-
-![LEDs en el dispositivo] 
-*Hardware real: LED 3 parpadeando, LED 2 encendido, LAN1 y WAN apagados según configuración; WPS LED intermitente*
-
-![Menú LED, estado final]  
-*Otro estado del menú mostrando triggers y acciones personalizados*
 
 ---
 
