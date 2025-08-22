@@ -7,7 +7,7 @@ rm -rf openwrt mtk-openwrt-feeds tmp_comxwrt
 
 echo "==== 2. CLONA REPOSITORIOS (kernel 6.6.100) ===="
 git clone --branch master https://github.com/brudalevante/openwrt-fakemesh.git openwrt || true
-cd openwrt; git checkout ec308f3bf71607d57ce930dd0f9fa50f9f18e14e; cd -;	# uhttpd: update to Git HEAD (2025-07-06) kernel 6.6.100
+cd openwrt; git checkout 7be94a4e0fe; cd -;	# uhttpd: update to Git HEAD (2025-07-06) kernel 6.6.100
 
 git clone https://github.com/brudalevante/mtk-18-08-25-espejo.git mtk-openwrt-feeds || true
 cd mtk-openwrt-feeds; git checkout 39d725c3e3b486405e6148c8466111ef13516808; cd -; # Refactor wed amsdu init value
