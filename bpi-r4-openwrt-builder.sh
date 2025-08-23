@@ -51,7 +51,14 @@ cp -v my_files/board.json openwrt/package/base-files/files/etc/board.json
 echo "==== 7. ENTRA EN OPENWRT Y CONFIGURA FEEDS ===="
 cd openwrt
 
+echo "==== 7.1 LIMPIEZA FEEDS ===="
 rm -rf feeds/
+if [ -f feeds.conf ]; then
+  echo "ATENCIÓN: Eliminando feeds.conf porque OpenWrt prioriza ese sobre feeds.conf.default"
+  rm -v feeds.conf
+fi
+
+echo "==== 7.2 CONTENIDO feeds.conf.default (debe ser el tuyo, con los commits buenos) ===="
 cat feeds.conf.default
 
 echo "==== 8. COPIA LA CONFIGURACIÓN BASE (mm_perf.config) ===="
@@ -63,6 +70,12 @@ cp -v ../configs/config_mm_06082025 ../mtk-openwrt-feeds/autobuild/unified/filog
 echo "==== 10. ACTUALIZA E INSTALA FEEDS ===="
 ./scripts/feeds update -a
 ./scripts/feeds install -a
+
+echo "==== 10.1 VERIFICA HASH DE LOS FEEDS DESCARGADOS ===="
+echo "HASH packages:" && head -1 feeds/packages/.git/HEAD || echo "No existe feeds/packages/.git/HEAD"
+echo "HASH luci:" && head -1 feeds/luci/.git/HEAD || echo "No existe feeds/luci/.git/HEAD"
+echo "HASH routing:" && head -1 feeds/routing/.git/HEAD || echo "No existe feeds/routing/.git/HEAD"
+echo "HASH telephony:" && head -1 feeds/telephony/.git/HEAD || echo "No existe feeds/telephony/.git/HEAD"
 
 echo "==== 11. RESUELVE DEPENDENCIAS ===="
 make defconfig
@@ -88,9 +101,6 @@ echo "==== ELIMINA WARNING SHA-512 DE scripts/ipkg-make-index.sh ===="
 if grep -q "WARNING: Applying padding" scripts/ipkg-make-index.sh; then
   sed -i '/WARNING: Applying padding/d' scripts/ipkg-make-index.sh
 fi
-
-echo "==== 12. COMPILA ===="
-make -j$(nproc)
 
 echo "==== 14. COMPILA ===="
 make -j$(nproc)
