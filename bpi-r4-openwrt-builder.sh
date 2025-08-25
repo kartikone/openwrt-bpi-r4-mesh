@@ -4,10 +4,10 @@ echo "==== 1. LIMPIEZA ===="
 rm -rf openwrt mtk-openwrt-feeds tmp_comxwrt
 
 echo "==== 2. CLONA REPOSITORIOS (kernel 6.6.100) ===="
-git clone --branch openwrt-24.10 https://github.com/brudalevante/openwrt-18-08-25-espejo.git openwrt || true
+git clone --branch main https://github.com/brudalevante/openwrt-espejo.git openwrt || true
 cd openwrt; git checkout 4941509f573676c4678115a0a3a743ef78b63c17; cd -;	# uhttpd: update to Git HEAD (2025-07-06) kernel 6.6.100
 
-git clone https://github.com/brudalevante/mtk-18-08-25-espejo.git mtk-openwrt-feeds || true
+git clone https://github.com/brudalevante/mtk-openwrt-feeds-18-08-2025.git mtk-openwrt-feeds || true
 cd mtk-openwrt-feeds; git checkout 39d725c3e3b486405e6148c8466111ef13516808; cd -; # Refactor wed amsdu init value
 
 echo "39d725" > mtk-openwrt-feeds/autobuild/unified/feed_revision
@@ -30,7 +30,7 @@ cp -r my_files/99999_tx_power_check.patch mtk-openwrt-feeds/autobuild/unified/fi
 cp -r my_files/999-2764-net-phy-sfp-add-some-FS-copper-SFP-fixes.patch openwrt/target/linux/mediatek/patches-6.6/
 
 echo "==== 5. CLONA Y COPIA PAQUETES PERSONALIZADOS ===="
-git clone --depth=1 --single-branch --branch main https://github.com/brudalevante/fakemesh-6g.git tmp_comxwrt
+git clone --depth=1 --single-branch --branch main https://github.com/brudalevante/fakemesh-6g-clon.git tmp_comxwrt
 cp -rv tmp_comxwrt/luci-app-fakemesh openwrt/package/
 cp -rv tmp_comxwrt/luci-app-autoreboot openwrt/package/
 cp -rv tmp_comxwrt/luci-app-cpu-status openwrt/package/
