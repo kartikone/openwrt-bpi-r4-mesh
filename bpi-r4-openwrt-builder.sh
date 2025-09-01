@@ -58,6 +58,22 @@ cp -v ../configs/config_mm_06082025 .config
 echo "==== 9. COPIA TU CONFIGURACIÓN PERSONALIZADA AL DEFCONFIG DEL AUTOBUILD ===="
 cp -v ../configs/config_mm_06082025 ../mtk-openwrt-feeds/autobuild/unified/filogic/24.10/defconfig
 
+# === BLOQUE ANTI-MLO ===
+echo "==== 10B. DESACTIVA MLO EN LOS CONFIG ===="
+for cfg in \
+  ../mtk-openwrt-feeds/autobuild/autobuild_5.4_mac80211_release/mt7988_wifi7_mac80211_mlo/.config \
+  ../mtk-openwrt-feeds/autobuild/unified/filogic/mac80211/24.10/defconfig \
+  ../mtk-openwrt-feeds/autobuild/autobuild_5.4_mac80211_release/mt7986_mac80211/.config
+do
+  [ -f "$cfg" ] || continue
+  sed -i 's/^CONFIG_MTK_MLO=y/# CONFIG_MTK_MLO is not set/' "$cfg"
+  sed -i 's/^CONFIG_MTK_WIFI_MLO=y/# CONFIG_MTK_WIFI_MLO is not set/' "$cfg"
+  sed -i 's/^CONFIG_MTK_WIFI7_MLO=y/# CONFIG_MTK_WIFI7_MLO is not set/' "$cfg"
+  sed -i 's/^CONFIG_MAC80211_MLO=y/# CONFIG_MAC80211_MLO is not set/' "$cfg"
+  sed -i 's/^CONFIG_MTK_WIFI_MAC80211_MLO=y/# CONFIG_MTK_WIFI_MAC80211_MLO is not set/' "$cfg"
+  sed -i 's/^CONFIG_MLO_SUPPORT=y/# CONFIG_MLO_SUPPORT is not set/' "$cfg"
+done
+
 echo "==== 10. ACTUALIZA E INSTALA FEEDS ===="
 ./scripts/feeds update -a
 ./scripts/feeds install -a
@@ -97,4 +113,4 @@ echo "==== 15. LIMPIEZA FINAL ===="
 cd ..
 rm -rf tmp_comxwrt
 
-echo "==== Script finalizado correctamente ===="#!/bin/bash
+echo "==== Script finalizado correctamente ===="
