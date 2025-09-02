@@ -14,7 +14,7 @@ echo "39d725" > mtk-openwrt-feeds/autobuild/unified/feed_revision
 
 cp -r my_files/w-autobuild.sh mtk-openwrt-feeds/autobuild/unified/autobuild.sh
 cp -r my_files/w-rules mtk-openwrt-feeds/autobuild/unified/filogic/rules
-chmod 776 -R mtk-openwrt-feeds/autobuild/unified
+
 
 rm -rf mtk-openwrt-feeds/24.10/patches-feeds/108-strongswan-add-uci-support.patch
 
@@ -59,21 +59,36 @@ cp -v ../configs/config_mm_06082025 .config
 echo "==== 9. COPIA TU CONFIGURACIÓN PERSONALIZADA AL DEFCONFIG DEL AUTOBUILD ===="
 cp -v ../configs/config_mm_06082025 ../mtk-openwrt-feeds/autobuild/unified/filogic/24.10/defconfig
 
-# === BLOQUE ANTI-MLO ===
-echo "==== 10B. DESACTIVA MLO EN LOS CONFIG ===="
-for cfg in \
-  ../mtk-openwrt-feeds/autobuild/autobuild_5.4_mac80211_release/mt7988_wifi7_mac80211_mlo/.config \
-  ../mtk-openwrt-feeds/autobuild/unified/filogic/mac80211/24.10/defconfig \
-  ../mtk-openwrt-feeds/autobuild/autobuild_5.4_mac80211_release/mt7986_mac80211/.config
-do
-  [ -f "$cfg" ] || continue
-  sed -i 's/^CONFIG_MTK_MLO=y/# CONFIG_MTK_MLO is not set/' "$cfg"
-  sed -i 's/^CONFIG_MTK_WIFI_MLO=y/# CONFIG_MTK_WIFI_MLO is not set/' "$cfg"
-  sed -i 's/^CONFIG_MTK_WIFI7_MLO=y/# CONFIG_MTK_WIFI7_MLO is not set/' "$cfg"
-  sed -i 's/^CONFIG_MAC80211_MLO=y/# CONFIG_MAC80211_MLO is not set/' "$cfg"
-  sed -i 's/^CONFIG_MTK_WIFI_MAC80211_MLO=y/# CONFIG_MTK_WIFI_MAC80211_MLO is not set/' "$cfg"
-  sed -i 's/^CONFIG_MLO_SUPPORT=y/# CONFIG_MLO_SUPPORT is not set/' "$cfg"
-done
+# === BLOQUE ANTI-MLO ULTRA ===
+echo "==== 10B. DESACTIVA MLO EN TODOS LOS .config, defconfig y Makefile ===="
+find ../mtk-openwrt-feeds/ -type f \( -name "*.config" -o -name "defconfig" \) -exec \
+  sed -i \
+    -e 's/^CONFIG_MTK_MLO=y/# CONFIG_MTK_MLO is not set/' \
+    -e 's/^CONFIG_MTK_WIFI_MLO=y/# CONFIG_MTK_WIFI_MLO is not set/' \
+    -e 's/^CONFIG_MTK_WIFI7_MLO=y/# CONFIG_MTK_WIFI7_MLO is not set/' \
+    -e 's/^CONFIG_MAC80211_MLO=y/# CONFIG_MAC80211_MLO is not set/' \
+    -e 's/^CONFIG_MTK_WIFI_MAC80211_MLO=y/# CONFIG_MTK_WIFI_MAC80211_MLO is not set/' \
+    -e 's/^CONFIG_MLO_SUPPORT=y/# CONFIG_MLO_SUPPORT is not set/' {} +
+
+find ../mtk-openwrt-feeds/ -type f \( -name "Makefile" -o -name "Kconfig" \) -exec \
+  sed -i \
+    -e '/select.*MLO/d' \
+    -e '/depends.*MLO/d' \
+    -e '/CONFIG_MTK_MLO:=y/d' \
+    -e '/CONFIG_MTK_WIFI_MLO:=y/d' \
+    -e '/CONFIG_MTK_WIFI7_MLO:=y/d' \
+    -e '/CONFIG_MAC80211_MLO:=y/d' \
+    -e '/CONFIG_MTK_WIFI_MAC80211_MLO:=y/d' \
+    -e '/CONFIG_MLO_SUPPORT:=y/d' {} +
+
+# También fuerza el .config de openwrt principal
+sed -i \
+    -e 's/^CONFIG_MTK_MLO=y/# CONFIG_MTK_MLO is not set/' \
+    -e 's/^CONFIG_MTK_WIFI_MLO=y/# CONFIG_MTK_WIFI_MLO is not set/' \
+    -e 's/^CONFIG_MTK_WIFI7_MLO=y/# CONFIG_MTK_WIFI7_MLO is not set/' \
+    -e 's/^CONFIG_MAC80211_MLO=y/# CONFIG_MAC80211_MLO is not set/' \
+    -e 's/^CONFIG_MTK_WIFI_MAC80211_MLO=y/# CONFIG_MTK_WIFI_MAC80211_MLO is not set/' \
+    -e 's/^CONFIG_MLO_SUPPORT=y/# CONFIG_MLO_SUPPORT is not set/' .config
 
 echo "==== 10. ACTUALIZA E INSTALA FEEDS ===="
 ./scripts/feeds update -a
@@ -81,6 +96,27 @@ echo "==== 10. ACTUALIZA E INSTALA FEEDS ===="
 
 echo "==== 11. RESUELVE DEPENDENCIAS ===="
 make defconfig
+
+# === BLOQUE ANTI-MLO ULTRA POST-defconfig ===
+echo "==== 11B. REAFIRMA DESACTIVACIÓN MLO EN .config y Makefiles ===="
+sed -i \
+    -e 's/^CONFIG_MTK_MLO=y/# CONFIG_MTK_MLO is not set/' \
+    -e 's/^CONFIG_MTK_WIFI_MLO=y/# CONFIG_MTK_WIFI_MLO is not set/' \
+    -e 's/^CONFIG_MTK_WIFI7_MLO=y/# CONFIG_MTK_WIFI7_MLO is not set/' \
+    -e 's/^CONFIG_MAC80211_MLO=y/# CONFIG_MAC80211_MLO is not set/' \
+    -e 's/^CONFIG_MTK_WIFI_MAC80211_MLO=y/# CONFIG_MTK_WIFI_MAC80211_MLO is not set/' \
+    -e 's/^CONFIG_MLO_SUPPORT=y/# CONFIG_MLO_SUPPORT is not set/' .config
+
+find ../mtk-openwrt-feeds/ -type f \( -name "Makefile" -o -name "Kconfig" \) -exec \
+  sed -i \
+    -e '/select.*MLO/d' \
+    -e '/depends.*MLO/d' \
+    -e '/CONFIG_MTK_MLO:=y/d' \
+    -e '/CONFIG_MTK_WIFI_MLO:=y/d' \
+    -e '/CONFIG_MTK_WIFI7_MLO:=y/d' \
+    -e '/CONFIG_MAC80211_MLO:=y/d' \
+    -e '/CONFIG_MTK_WIFI_MAC80211_MLO:=y/d' \
+    -e '/CONFIG_MLO_SUPPORT:=y/d' {} +
 
 echo "==== 12. VERIFICACIÓN FINAL ===="
 for pkg in \
@@ -93,6 +129,10 @@ grep "CONFIG_PACKAGE_kmod-wireguard=y" .config || echo "ATENCIÓN: kmod-wireguar
 grep "CONFIG_PACKAGE_wireguard-tools=y" .config || echo "ATENCIÓN: wireguard-tools NO está marcado"
 grep "CONFIG_PACKAGE_luci-proto-wireguard=y" .config || echo "ATENCIÓN: luci-proto-wireguard NO está marcado"
 
+# === BLOQUE DE CHEQUEO FINAL DE MLO ===
+echo "==== 12B. CHEQUEO DE MLO EN configs y Makefiles ===="
+grep -rni --color=auto mlo ../mtk-openwrt-feeds/ | grep -E 'MLO|mlo|=y|:=y|select|depends' && echo "¡¡¡ATENCIÓN!!! MLO SIGUE ACTIVO" || echo "Ok, MLO desactivado (no hay MLO forzado en configs ni Makefiles)"
+
 echo "==== 13. EJECUTA AUTOBUILD ===="
 bash ../mtk-openwrt-feeds/autobuild/unified/autobuild.sh filogic-mac80211-mt7988_rfb-mt7996 log_file=make
 
@@ -103,9 +143,6 @@ echo "==== ELIMINA WARNING SHA-512 DE scripts/ipkg-make-index.sh ===="
 if grep -q "WARNING: Applying padding" scripts/ipkg-make-index.sh; then
   sed -i '/WARNING: Applying padding/d' scripts/ipkg-make-index.sh
 fi
-
-echo "==== 12. COMPILA ===="
-make -j$(nproc)
 
 echo "==== 14. COMPILA ===="
 make -j$(nproc)
