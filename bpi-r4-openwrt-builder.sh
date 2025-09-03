@@ -46,7 +46,6 @@ mkdir -p openwrt/package/base-files/files/etc
 
 cp -v configs/network openwrt/package/base-files/files/etc/config/network
 cp -v configs/system openwrt/package/base-files/files/etc/config/system
-cp -v configs/wireless openwrt/package/base-files/files/etc/config/wireless
 cp -v my_files/board.json openwrt/package/base-files/files/etc/board.json
 
 echo "==== 7. ENTRA EN OPENWRT Y CONFIGURA FEEDS ===="
