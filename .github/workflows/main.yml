@@ -16,6 +16,21 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+      - name: Increase disk space
+        # You may pin to the exact commit or the version.
+        # uses: fcbg-platforms/increase-disk-space@e533c293181d7dd3ab662df371ee42174235fb85
+        uses: fcbg-platforms/increase-disk-space@v0.1.0
+        with:
+          # If True, remove Android runtime.
+          android: True
+          # If True, remove .NET runtime.
+          dotnet: True
+          # If True, remove Haskell runtime.
+          haskell: True
+          # If True, remove large packages.
+          large-packages: True
+          # If True, remove old .NET runtime.
+          old-dotnet: True
 
       - name: Build
         run: |
