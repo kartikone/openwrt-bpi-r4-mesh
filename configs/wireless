@@ -1,4 +1,3 @@
-
 config wifi-device 'radio0'
 	option type 'mac80211'
 	option path 'soc/11300000.pcie/pci0000:00/0000:00:00.0/0000:01:00.0'
@@ -7,12 +6,10 @@ config wifi-device 'radio0'
 	option channel '1'
 	option htmode 'EHT40'
 	option country 'US'
-	option disabled '0'
 	option noscan '1'
 	option rnr '1'
 	option tx_burst '0.0'
 	option cell_density '0'
-
 
 config wifi-device 'radio1'
 	option type 'mac80211'
@@ -28,8 +25,6 @@ config wifi-device 'radio1'
 	option tx_burst '0.0'
 	option cell_density '0'
 
-
-
 config wifi-device 'radio2'
 	option type 'mac80211'
 	option path 'soc/11300000.pcie/pci0000:00/0000:00:00.0/0000:01:00.0'
@@ -42,28 +37,30 @@ config wifi-device 'radio2'
 	option cell_density '0'
 
 
-
-config wifi-iface 'wifinet1'
+config wifi-iface 'wifinet0'
 	option device 'radio0'
 	option mode 'ap'
-	option ssid 'OpenWrt 2G'
+	option ssid 'OpenWrt'
 	option encryption 'sae'
 	option key '12345678'
+	option ocv '0'
 	option network 'lan'
 
-
-config wifi-iface 'wifinet2'
+config wifi-iface 'wifinet1'
 	option device 'radio1'
 	option mode 'ap'
-	option ssid 'OpenWrt 5G'
+	option ssid 'OpenWrt-5g'
 	option encryption 'sae'
 	option key '12345678'
+	option ocv '0'
 	option network 'lan'
 
-config wifi-iface 'wifinet3'
+config wifi-iface 'wifinet2'
 	option device 'radio2'
 	option mode 'ap'
-	option ssid 'OpenWrt 6G'
+	option ssid 'OpenWrt-6g'
 	option encryption 'sae'
 	option key '12345678'
+	option ocv '0'
 	option network 'lan'
+
