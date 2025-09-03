@@ -19,6 +19,7 @@ jobs:
 
       - name: Build
         run: |
+          sudo rm -rf /opt/hostedtoolcache
           cd ..
           chmod 776 -R openwrt-bpi-r4-mesh
           cd openwrt-bpi-r4-mesh
