@@ -19,6 +19,7 @@ jobs:
 
       - name: Build
         run: |
+          cd ..
           chmod 776 -R openwrt-bpi-r4-mesh
           cd openwrt-bpi-r4-mesh
           ./bpi-r4-openwrt-builder.sh
