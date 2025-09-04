@@ -2,19 +2,18 @@
 
 set -e
 
-echo "==== 1. LIMPIEZA PREVIA ===="
+echo "==== 1. LIMPIEZA ===="
 rm -rf openwrt mtk-openwrt-feeds tmp_comxwrt
 
-echo "==== 2. CLONA REPOSITORIOS ===="
+echo "==== 2. CLONA REPOSITORIOS (kernel 6.6.100) ===="
 git clone --branch main https://github.com/brudalevante/openwrt-espejo.git openwrt || true
-cd openwrt; git checkout 4941509f573676c4678115a0a3a743ef78b63c17; cd -
+cd openwrt; git checkout 4941509f573676c4678115a0a3a743ef78b63c17; cd -;	# uhttpd: update to Git HEAD (2025-07-06) kernel 6.6.100
 
-git clone https://github.com/brudalevante/mtk-18-08-25-espejo.git mtk-openwrt-feeds || true
-cd mtk-openwrt-feeds; git checkout 39d725c3e3b486405e6148c8466111ef13516808; cd -
+git clone https://github.com/brudalevante/mtk-openwrt-feeds-18-08-2025.git mtk-openwrt-feeds || true
+cd mtk-openwrt-feeds; git checkout 39d725c3e3b486405e6148c8466111ef13516808; cd -; # Refactor wed amsdu init value
 
 echo "39d725" > mtk-openwrt-feeds/autobuild/unified/feed_revision
 
-echo "==== 3. COPIA SCRIPTS Y REGLAS ===="
 cp -r my_files/w-autobuild.sh mtk-openwrt-feeds/autobuild/unified/autobuild.sh
 cp -r my_files/w-rules mtk-openwrt-feeds/autobuild/unified/filogic/rules
 chmod 776 -R mtk-openwrt-feeds/autobuild/unified
@@ -69,16 +68,10 @@ echo "==== 10. ACTUALIZA E INSTALA FEEDS ===="
 echo "==== 11. RESUELVE DEPENDENCIAS ===="
 make defconfig
 
-echo "==== 11b. LIMPIEZA ABSOLUTA DE PAQUETES CONFLICTIVOS ===="
-find . ../mtk-openwrt-feeds -type f \( -name "*.config" -o -name "defconfig" \) \
-  -exec sed -i '/mt76-test/d' {} \; \
-  -exec sed -i '/mt7988-wo-firmware/d' {} \; \
-  -exec sed -i '/MODULE_DEFAULT_mt7988-wo-firmware/d' {} \;
-
-make defconfig
-
 echo "==== 12. VERIFICACIÓN FINAL ===="
-for pkg in fakemesh autoreboot cpu-status temp-status dawn2 dawn usteer2 wireguard; do
+for pkg in \
+  fakemesh autoreboot cpu-status temp-status dawn2 dawn usteer2 wireguard
+do
   grep $pkg .config || echo "NO aparece $pkg en .config"
 done
 
@@ -89,14 +82,6 @@ grep "CONFIG_PACKAGE_luci-proto-wireguard=y" .config || echo "ATENCIÓN: luci-pr
 echo "==== 13. EJECUTA AUTOBUILD ===="
 bash ../mtk-openwrt-feeds/autobuild/unified/autobuild.sh filogic-mac80211-mt7988_rfb-mt7996 log_file=make
 
-echo "==== 13b. LIMPIEZA FINAL DE PAQUETES CONFLICTIVOS ===="
-find . ../mtk-openwrt-feeds -type f \( -name "*.config" -o -name "defconfig" \) \
-  -exec sed -i '/mt76-test/d' {} \; \
-  -exec sed -i '/mt7988-wo-firmware/d' {} \; \
-  -exec sed -i '/MODULE_DEFAULT_mt7988-wo-firmware/d' {} \;
-
-make defconfig
-
 # ==== ELIMINAR EL WARNING EN ROJO DEL MAKEFILE ====
 sed -i 's/\($(call ERROR_MESSAGE,WARNING: Applying padding.*\)/#\1/' package/Makefile
 
@@ -105,13 +90,13 @@ if grep -q "WARNING: Applying padding" scripts/ipkg-make-index.sh; then
   sed -i '/WARNING: Applying padding/d' scripts/ipkg-make-index.sh
 fi
 
+echo "==== 12. COMPILA ===="
+make -j$(nproc)
+
 echo "==== 14. COMPILA ===="
 make -j$(nproc)
 
-echo "==== 15. COMPILA (segundo intento) ===="
-make -j$(nproc)
-
-echo "==== 16. LIMPIEZA FINAL ===="
+echo "==== 15. LIMPIEZA FINAL ===="
 cd ..
 rm -rf tmp_comxwrt
 
