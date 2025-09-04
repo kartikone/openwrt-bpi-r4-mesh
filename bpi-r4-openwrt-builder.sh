@@ -67,6 +67,13 @@ echo "==== 10. ACTUALIZA E INSTALA FEEDS ===="
 echo "==== 11. RESUELVE DEPENDENCIAS ===="
 make defconfig
 
+# === BLOQUE PARA ELIMINAR LOS PAQUETES mt7988-wo-firmware y mt76-test ===
+sed -i '/CONFIG_MODULE_DEFAULT_mt7988-wo-firmware=y/d' .config
+sed -i '/CONFIG_PACKAGE_mt76-test=y/d' .config
+echo "# CONFIG_MODULE_DEFAULT_mt7988-wo-firmware is not set" >> .config
+echo "# CONFIG_PACKAGE_mt76-test is not set" >> .config
+make defconfig
+
 echo "==== 12. VERIFICACIÓN FINAL ===="
 for pkg in \
   fakemesh autoreboot cpu-status temp-status dawn2 dawn usteer2 wireguard
