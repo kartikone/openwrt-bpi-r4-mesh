@@ -7,10 +7,10 @@ rm -rf openwrt mtk-openwrt-feeds tmp_comxwrt
 
 echo "==== 2. CLONA REPOSITORIOS (kernel 6.6.100) ===="
 git clone --branch main https://github.com/brudalevante/openwrt-espejo.git openwrt || true
-cd openwrt; git checkout 4941509f573676c4678115a0a3a743ef78b63c17; cd -;	# uhttpd: update to Git HEAD (2025-07-06) kernel 6.6.100
+cd openwrt; git checkout 4941509f573676c4678115a0a3a743ef78b63c17; cd -;	# kernel 6.6.100
 
 git clone https://github.com/brudalevante/mtk-18-08-25-espejo.git mtk-openwrt-feeds || true
-cd mtk-openwrt-feeds; git checkout 39d725c3e3b486405e6148c8466111ef13516808; cd -; # Refactor wed amsdu init value
+cd mtk-openwrt-feeds; git checkout 39d725c3e3b486405e6148c8466111ef13516808; cd -
 
 echo "39d725" > mtk-openwrt-feeds/autobuild/unified/feed_revision
 
@@ -67,7 +67,7 @@ echo "==== 10. ACTUALIZA E INSTALA FEEDS ===="
 echo "==== 11. RESUELVE DEPENDENCIAS ===="
 make defconfig
 
-# === BLOQUE PARA ELIMINAR LOS PAQUETES mt7988-wo-firmware y mt76-test ===
+# === BLOQUE PARA ELIMINAR LOS PAQUETES mt7988-wo-firmware y mt76-test ANTES DEL AUTOBUILD ===
 sed -i '/CONFIG_PACKAGE_mt76-test=y/d' .config
 echo "# CONFIG_PACKAGE_mt76-test is not set" >> .config
 
@@ -92,6 +92,16 @@ grep "CONFIG_PACKAGE_luci-proto-wireguard=y" .config || echo "ATENCIÓN: luci-pr
 
 echo "==== 13. EJECUTA AUTOBUILD ===="
 bash ../mtk-openwrt-feeds/autobuild/unified/autobuild.sh filogic-mac80211-mt7988_rfb-mt7996 log_file=make
+
+# === DESACTIVA PAQUETES FORZADOS POR AUTOBUILD ===
+sed -i '/CONFIG_PACKAGE_mt76-test=y/d' .config
+sed -i '/CONFIG_PACKAGE_mt7988-wo-firmware=y/d' .config
+sed -i '/CONFIG_MODULE_DEFAULT_mt7988-wo-firmware=y/d' .config
+echo "# CONFIG_PACKAGE_mt76-test is not set" >> .config
+echo "# CONFIG_PACKAGE_mt7988-wo-firmware is not set" >> .config
+echo "# CONFIG_MODULE_DEFAULT_mt7988-wo-firmware is not set" >> .config
+
+make defconfig
 
 # ==== ELIMINAR EL WARNING EN ROJO DEL MAKEFILE ====
 sed -i 's/\($(call ERROR_MESSAGE,WARNING: Applying padding.*\)/#\1/' package/Makefile
