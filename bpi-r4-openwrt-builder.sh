@@ -68,10 +68,15 @@ echo "==== 11. RESUELVE DEPENDENCIAS ===="
 make defconfig
 
 # === BLOQUE PARA ELIMINAR LOS PAQUETES mt7988-wo-firmware y mt76-test ===
-sed -i '/CONFIG_MODULE_DEFAULT_mt7988-wo-firmware=y/d' .config
 sed -i '/CONFIG_PACKAGE_mt76-test=y/d' .config
-echo "# CONFIG_MODULE_DEFAULT_mt7988-wo-firmware is not set" >> .config
 echo "# CONFIG_PACKAGE_mt76-test is not set" >> .config
+
+sed -i '/CONFIG_PACKAGE_mt7988-wo-firmware=y/d' .config
+echo "# CONFIG_PACKAGE_mt7988-wo-firmware is not set" >> .config
+
+sed -i '/CONFIG_MODULE_DEFAULT_mt7988-wo-firmware=y/d' .config
+echo "# CONFIG_MODULE_DEFAULT_mt7988-wo-firmware is not set" >> .config
+
 make defconfig
 
 echo "==== 12. VERIFICACIÓN FINAL ===="
@@ -96,13 +101,13 @@ if grep -q "WARNING: Applying padding" scripts/ipkg-make-index.sh; then
   sed -i '/WARNING: Applying padding/d' scripts/ipkg-make-index.sh
 fi
 
-echo "==== 12. COMPILA ===="
-make -j$(nproc)
-
 echo "==== 14. COMPILA ===="
 make -j$(nproc)
 
-echo "==== 15. LIMPIEZA FINAL ===="
+echo "==== 15. COMPILA (segundo intento) ===="
+make -j$(nproc)
+
+echo "==== 16. LIMPIEZA FINAL ===="
 cd ..
 rm -rf tmp_comxwrt
 
