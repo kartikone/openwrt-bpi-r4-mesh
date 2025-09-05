@@ -9,7 +9,7 @@ echo "==== 2. CLONA REPOSITORIOS (kernel 6.6.100) ===="
 git clone --branch main https://github.com/brudalevante/openwrt-espejo.git openwrt || true
 cd openwrt; git checkout 4941509f573676c4678115a0a3a743ef78b63c17; cd -;	# uhttpd: update to Git HEAD (2025-07-06) kernel 6.6.100
 
-git clone https://github.com/brudalevante/mtk-openwrt-feeds-18-08-2025.git mtk-openwrt-feeds || true
+git clone https://github.com/brudalevante/mtk-18-08-25-espejo.git mtk-openwrt-feeds || true
 cd mtk-openwrt-feeds; git checkout 39d725c3e3b486405e6148c8466111ef13516808; cd -; # Refactor wed amsdu init value
 
 echo "39d725" > mtk-openwrt-feeds/autobuild/unified/feed_revision
@@ -30,6 +30,7 @@ cp -r my_files/1007-wozi-arch-arm64-dts-mt7988a-add-thermal-zone.patch mtk-openw
 cp -r my_files/200-wozi-libiwinfo-fix_noise_reading_for_radios.patch openwrt/package/network/utils/iwinfo/patches
 cp -r my_files/99999_tx_power_check.patch mtk-openwrt-feeds/autobuild/unified/filogic/mac80211/24.10/files/package/kernel/mt76/patches/
 cp -r my_files/999-2764-net-phy-sfp-add-some-FS-copper-SFP-fixes.patch openwrt/target/linux/mediatek/patches-6.6/
+cp -r my_files/500-tx_power.patch mtk-openwrt-feeds/autobuild/unified/filogic/mac80211/24.10/files/package/firmware/wireless-regdb/patches
 
 echo "==== 5. CLONA Y COPIA PAQUETES PERSONALIZADOS ===="
 git clone --depth=1 --single-branch --branch main https://github.com/brudalevante/fakemesh-6g-clon.git tmp_comxwrt
@@ -46,7 +47,6 @@ mkdir -p openwrt/package/base-files/files/etc
 
 cp -v configs/network openwrt/package/base-files/files/etc/config/network
 cp -v configs/system openwrt/package/base-files/files/etc/config/system
-cp -v configs/wireless openwrt/package/base-files/files/etc/config/wireless
 cp -v my_files/board.json openwrt/package/base-files/files/etc/board.json
 
 echo "==== 7. ENTRA EN OPENWRT Y CONFIGURA FEEDS ===="
